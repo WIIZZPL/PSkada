@@ -42,6 +42,7 @@ void processImput() {
 			menu_processImput(&event);
 			break;
 		case 1: //gra
+			game_processImput(&event);
 			break;
 		case 2: //end game
 			break;

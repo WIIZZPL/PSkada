@@ -1,6 +1,7 @@
 #include "update.h"
 
 #include "menu.h"
+#include "game.h"
 
 void update(double t, double dt) {
 
@@ -9,6 +10,7 @@ void update(double t, double dt) {
 		menu_update(t, dt);
 		break;
 	case 1: //Gra
+		game_update(t, dt);
 		break;
 	case 2: //End game
 		break;

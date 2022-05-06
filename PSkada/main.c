@@ -39,7 +39,7 @@ int main(){
 	sceneNumber = 0;
 	scene_init();
 	double time = 0;
-	const double SPT = 1 / 60.0, SPF = 1 / 60.0;
+	const double SPT = 1 / 120.0;
 
 	double FPS[10];
 	int FPSi = 0;
