@@ -1,20 +1,18 @@
 #include "rectangle.h"
 
-Rectangle* createRectangle(float x, float y, float w, float h, ALLEGRO_BITMAP* background) {
-	if (!background) exit(138);
+Rectangle* createRectangle(float x, float y, float w, float h, ALLEGRO_BITMAP* bmp) {
 	Rectangle* newRectangle = (Rectangle*)malloc(sizeof(Rectangle));
-	if (!newRectangle) return NULL;
+	if (!newRectangle || !bmp) exit(138);
 	newRectangle->x = x;
 	newRectangle->y = y;
 	newRectangle->w = w;
 	newRectangle->h = h;
-	newRectangle->background = background;
+	newRectangle->bmp = bmp;
 	return newRectangle;
 }
 
 void renderRectangle(Rectangle* rectangle) {
-	if (!rectangle) exit(138);
-	al_draw_scaled_bitmap(rectangle->background, 0, 0, al_get_bitmap_width(rectangle->background), al_get_bitmap_height(rectangle->background),
+	al_draw_scaled_bitmap(rectangle->bmp, 0, 0, al_get_bitmap_width(rectangle->bmp), al_get_bitmap_height(rectangle->bmp),
 		rectangle->x * displayWidth + displayX, rectangle->y * displayHeight + displayY, rectangle->w * displayWidth, rectangle->h * displayHeight, 0);
 }
 
@@ -25,6 +23,6 @@ int pointCollisionRectangle(Rectangle* rectangle, int x, int y) {
 
 void destroyRectangle(Rectangle* rectangle) {
 	if (!rectangle) return;
-	al_destroy_bitmap(rectangle->background);
+	al_destroy_bitmap(rectangle->bmp);
 	free(rectangle);
 }

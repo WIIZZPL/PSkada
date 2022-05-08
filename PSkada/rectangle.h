@@ -7,10 +7,10 @@
 
 typedef struct Rectangle {
 	float x, y, w, h;
-	ALLEGRO_BITMAP* background;
+	ALLEGRO_BITMAP* bmp;
 } Rectangle;
 
-Rectangle* createRectangle(float x, float y, float w, float h, ALLEGRO_BITMAP* background);
+Rectangle* createRectangle(float x, float y, float w, float h, ALLEGRO_BITMAP* bmp);
 
 void renderRectangle(Rectangle* rectangle);
 

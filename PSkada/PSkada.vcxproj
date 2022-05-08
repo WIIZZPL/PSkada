@@ -149,10 +149,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ball.c" />
     <ClCompile Include="circle.c" />
     <ClCompile Include="game.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="menu.c" />
+    <ClCompile Include="Palette.c" />
     <ClCompile Include="processImput.c" />
     <ClCompile Include="rectangle.c" />
     <ClCompile Include="render.c" />
@@ -163,10 +165,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="circle.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GLOBALVARS.h" />
     <ClInclude Include="menu.h" />
+    <ClInclude Include="Palette.h" />
     <ClInclude Include="processImput.h" />
     <ClInclude Include="rectangle.h" />
     <ClInclude Include="render.h" />
