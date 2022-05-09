@@ -11,6 +11,7 @@ typedef struct Rectangle {
 } Rectangle;
 
 Rectangle* createRectangle(float x, float y, float w, float h, ALLEGRO_BITMAP* bmp);
+Rectangle* copyRectangle(Rectangle* rectangle);
 
 void renderRectangle(Rectangle* thisRectangle);
 

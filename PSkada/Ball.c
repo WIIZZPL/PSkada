@@ -13,7 +13,7 @@ void updateBall(Ball** thisBall, Palette* palette, Brick** brick, double dt) {
 	(*thisBall)->x += (*thisBall)->speed[0] * dt;
 	(*thisBall)->y += (*thisBall)->speed[1] * dt;
 	
-	//BOUNDING BOX COLISSION
+	//BOUNDING BOX COLLISION
 	if ((*thisBall)->x + (*thisBall)->r > 1 || (*thisBall)->x - (*thisBall)->r < 0) {
 		(*thisBall)->speed[0] *= -1;
 		max((*thisBall)->r, (*thisBall)->x);
@@ -25,7 +25,7 @@ void updateBall(Ball** thisBall, Palette* palette, Brick** brick, double dt) {
 		min(1 - (*thisBall)->r, (*thisBall)->y);
 	}
 
-	//PALETTE COLISSION
+	//PALETTE COLLISION
 	//nearest point on the palette to the circle
 	{
 		float nx = max(palette->x, min(palette->x + palette->w, (*thisBall)->x));
@@ -41,8 +41,8 @@ void updateBall(Ball** thisBall, Palette* palette, Brick** brick, double dt) {
 		}
 	}
 
-	//BRICK COLISSION
-	if(*brick) {
+	//BRICK COLLISION
+	/*if (*brick) {
 		float nx = max((*brick)->x, min((*brick)->x + (*brick)->w, (*thisBall)->x));
 		float ny = max((*brick)->y, min((*brick)->y + (*brick)->h, (*thisBall)->y));
 		if (powf(fabsf(nx - (*thisBall)->x), 2) + powf(fabsf(ny - (*thisBall)->y), 2) <= powf((*thisBall)->r, 2)) {
@@ -54,7 +54,7 @@ void updateBall(Ball** thisBall, Palette* palette, Brick** brick, double dt) {
 			}
 			destroyBrick(brick);
 		}
-	}
+	}*/
 }
 
 void renderBall(Ball* thisBall, double lag) {
