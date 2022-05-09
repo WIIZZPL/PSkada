@@ -14,4 +14,4 @@ typedef struct Circle {
 
 Circle* createCircle(float x, float y, float r, float speed[2], float acceleration[2], ALLEGRO_BITMAP* bmp);
 void renderCircle(Circle* thisCircle, double lag);
-void destroyCircle(Circle* thisCircle);
+void destroyCircle(Circle** thisCircle);

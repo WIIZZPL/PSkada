@@ -23,6 +23,6 @@ void renderPalette(Palette* thisPalette) {
 	renderRectangle(thisPalette);
 }
 
-void destroyPalette(Palette* thisPalette) {
+void destroyPalette(Palette** thisPalette) {
 	destroyRectangle(thisPalette);
 }

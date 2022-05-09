@@ -12,8 +12,6 @@ typedef struct Rectangle {
 
 Rectangle* createRectangle(float x, float y, float w, float h, ALLEGRO_BITMAP* bmp);
 
-void renderRectangle(Rectangle* rectangle);
+void renderRectangle(Rectangle* thisRectangle);
 
-int pointCollisionRectangle(Rectangle* rectangle, int x, int y);
-
-void destroyRectangle(Rectangle* rectangle);
+void destroyRectangle(Rectangle** thisRectangle);

@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Objects">
+      <UniqueIdentifier>{9ab067f1-60c7-40c1-9eda-6e5373052ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{5f31fb10-c857-4103-b682-28f12ae70ed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abstract Classes">
+      <UniqueIdentifier>{f05f7744-fd82-42f3-87de-5f1f669f1343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abstract Classes">
+      <UniqueIdentifier>{b7700fe8-30c9-440b-b8a3-afb1595d1715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{7ee50a35-46b7-4b1c-a3de-b00ee7ef7fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{af9a185c-0f5b-4c8e-a7a9-91b340eddb57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -27,26 +45,32 @@
     <ClCompile Include="render.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rectangle.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="menu.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="switchScenes.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="circle.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Ball.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Palette.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="circle.c">
+      <Filter>Source Files\Abstract Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="rectangle.c">
+      <Filter>Source Files\Abstract Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="game.c">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.c">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.c">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.c">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,26 +89,32 @@
     <ClInclude Include="render.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rectangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="switchScenes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="circle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Ball.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Palette.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="circle.h">
+      <Filter>Header Files\Abstract Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle.h">
+      <Filter>Header Files\Abstract Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

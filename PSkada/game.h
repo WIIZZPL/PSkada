@@ -1,6 +1,12 @@
 #pragma once
 
 #include <allegro5/allegro5.h>
+#include <allegro5/allegro_primitives.h>
+#include "switchScenes.h"
+
+#include "Palette.h"
+#include "Ball.h"
+#include "Brick.h"
 
 void game_init();
 

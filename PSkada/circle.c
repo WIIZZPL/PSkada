@@ -32,7 +32,9 @@ void renderCircle(Circle* thisCircle, double lag) {
 		x - r, y - r, r * 2, r * 2, 0);
 }
 
-void destroyCircle(Circle* thisCircle) {
-	if (!thisCircle) return;
-	free(thisCircle);
+void destroyCircle(Circle** thisCircle) {
+	if (!*thisCircle) return;
+	al_destroy_bitmap((*thisCircle)->bmp);
+	free(*thisCircle);
+	*thisCircle = NULL;
 }

@@ -4,7 +4,8 @@
 #include <allegro5/allegro_primitives.h>
 
 #include "GLOBALVARS.h"
-#include "rectangle.h"
+#include "switchScenes.h"
+#include "Button.h"
 
 int menu_init();
 

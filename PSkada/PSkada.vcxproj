@@ -150,6 +150,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.c" />
+    <ClCompile Include="Brick.c" />
+    <ClCompile Include="Button.c" />
     <ClCompile Include="circle.c" />
     <ClCompile Include="game.c" />
     <ClCompile Include="main.c" />
@@ -166,6 +168,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Brick.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="circle.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GLOBALVARS.h" />
