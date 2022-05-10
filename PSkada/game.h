@@ -7,6 +7,8 @@
 #include "Palette.h"
 #include "Ball.h"
 #include "Brick.h"
+#include "BrickQTree.h"
+#include "BrickDArray.h"
 
 void game_init();
 
