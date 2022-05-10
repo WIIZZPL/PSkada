@@ -14,4 +14,6 @@ void appendBrickDArray(BrickDArray* thisBrickDArray, Brick* brick);
 void removeBrickDArray(BrickDArray* thisBrickDArray, Brick** brick);
 void shrinkBrickDArray(BrickDArray* thisBrickDArray);
 
+void renderBrickDArray(BrickDArray* thisBrickDArray);
+
 void destroyBrickDArray(BrickDArray** thisBrickDArray);

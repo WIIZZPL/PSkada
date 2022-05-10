@@ -83,6 +83,7 @@ void destroyBrickQTree(BrickQTree** thisBrickQTree) {
 	free(*thisBrickQTree);
 	*thisBrickQTree = NULL;
 }
+
 #include <allegro5/allegro_primitives.h>
 void renderBrickQTree(BrickQTree* thisBrickQTree) {
 	if (isSubdivedBrickQTree(thisBrickQTree)) {
@@ -90,9 +91,6 @@ void renderBrickQTree(BrickQTree* thisBrickQTree) {
 		renderBrickQTree(thisBrickQTree->subdivs[1]);
 		renderBrickQTree(thisBrickQTree->subdivs[2]);
 		renderBrickQTree(thisBrickQTree->subdivs[3]);
-	}
-	else {
-		for (int i = 0; i < thisBrickQTree->size; i++) renderBrick(*thisBrickQTree->bricks[i]);
 	}
 	al_draw_rectangle((thisBrickQTree->x) * displayWidth, (thisBrickQTree->y) * displayHeight,
 		(thisBrickQTree->x + thisBrickQTree->w) * displayWidth, (thisBrickQTree->y + thisBrickQTree->h) * displayHeight,

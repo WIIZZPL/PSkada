@@ -23,8 +23,9 @@ void removeBrickDArray(BrickDArray* thisBrickDArray, Brick** brick) {
 	destroyBrick(brick);
 	unsigned int index = brick-thisBrickDArray->arr;
 	for (unsigned int i = index; i < thisBrickDArray->size; i++) {
-		thisBrickDArray->arr[i] = thisBrickDArray->arr[i + i];
+		thisBrickDArray->arr[i] = thisBrickDArray->arr[i + 1];
 	}
+	thisBrickDArray->size--;
 }
 
 void shrinkBrickDArray(BrickDArray* thisBrickDArray) {
@@ -32,6 +33,12 @@ void shrinkBrickDArray(BrickDArray* thisBrickDArray) {
 		thisBrickDArray->capacity /= 2;
 		thisBrickDArray->arr = (Brick**)realloc(thisBrickDArray->arr, thisBrickDArray->capacity);
 		if (!thisBrickDArray->arr) exit(138);
+	}
+}
+#include <stdio.h>
+void renderBrickDArray(BrickDArray* thisBrickDArray) {
+	for (unsigned int i = 0; i < thisBrickDArray->size; i++) {
+		renderBrick(thisBrickDArray->arr[i]);
 	}
 }
 

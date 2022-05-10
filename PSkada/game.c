@@ -41,13 +41,14 @@ void game_update(double t, double dt) {
 	}
 
 	updatePalette(palette, dt, keyboardState);
-	updateBall(&ball, palette, NULL, dt);
+	updateBall(&ball, palette, bricks, bricksQTree, dt);
 }
 
 void game_render(ALLEGRO_DISPLAY* display, double lag) {
 	al_draw_filled_rectangle(displayX, displayY, displayX + displayWidth, displayY + displayHeight, al_map_rgb(38, 0, 83));
 	renderPalette(palette);
 	renderBall(ball, lag);
+	renderBrickDArray(bricks);
 	renderBrickQTree(bricksQTree);
 }
 
