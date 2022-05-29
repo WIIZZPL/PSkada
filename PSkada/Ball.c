@@ -6,10 +6,15 @@ Ball* createBall(float x, float y, float r, ALLEGRO_BITMAP* bmp) {
 
 	Ball* newBall = createCircle(x, y, r, ballSpeed, ballAcceleration, bmp);
 	if (!newBall) exit(138);
+
+	newBall->userParam = (char*)malloc(sizeof(char));
+	if (!newBall->userParam) exit(138);
+	*(char*)newBall->userParam = 1; //Non-Penetrating. if 0 don't reflect
+
 	return newBall;
 }
 
-void updateBall(Ball** thisBall, Palette* palette, BrickDArray* bricks, BrickQTree* bricksQTree, double dt) {
+void updateBall(Ball** thisBall, Palette* palette, BrickDArray* bricks, BrickQTree* bricksQTree, UpgradeDArray* upgrades, double dt) {
 	
 	//MOVEMENT
 	(*thisBall)->x += (*thisBall)->speed[0] * dt;
@@ -21,6 +26,10 @@ void updateBall(Ball** thisBall, Palette* palette, BrickDArray* bricks, BrickQTr
 		max((*thisBall)->r, (*thisBall)->x);
 		min(1 - (*thisBall)->r, (*thisBall)->x);
 	}
+	//if ((*thisBall)->y + (*thisBall)->r > 1) {
+	//	destroyBall(thisBall);
+	//	return;
+	//}
 	if ((*thisBall)->y + (*thisBall)->r > 1 || (*thisBall)->y - (*thisBall)->r < 0) {
 		(*thisBall)->speed[1] *= -1;
 		max((*thisBall)->r, (*thisBall)->y);
@@ -45,18 +54,18 @@ void updateBall(Ball** thisBall, Palette* palette, BrickDArray* bricks, BrickQTr
 
 	//BRICK COLLISION
 	//Possibly coliding brick
-	brickQTreeBallColission(*thisBall, bricks, bricksQTree);
+	brickQTreeBallColission(*thisBall, bricks, bricksQTree, upgrades);
 }
 
-void brickQTreeBallColission(Ball* thisBall, BrickDArray* bricks, BrickQTree* bricksQTree) {
+void brickQTreeBallColission(Ball* thisBall, BrickDArray* bricks, BrickQTree* bricksQTree, UpgradeDArray* upgrades) {
 	float QTnx = max(bricksQTree->x, min(bricksQTree->x + bricksQTree->w, thisBall->x));
 	float QTny = max(bricksQTree->y, min(bricksQTree->y + bricksQTree->h, thisBall->y));
 	if (powf(fabsf(QTnx - thisBall->x), 2) + powf(fabsf(QTny - thisBall->y), 2) <= powf(thisBall->r, 2)) {
 		if (isSubdivedBrickQTree(bricksQTree)) {
-			brickQTreeBallColission(thisBall, bricks, bricksQTree->subdivs[0]);
-			brickQTreeBallColission(thisBall, bricks, bricksQTree->subdivs[1]);
-			brickQTreeBallColission(thisBall, bricks, bricksQTree->subdivs[2]);
-			brickQTreeBallColission(thisBall, bricks, bricksQTree->subdivs[3]);
+			brickQTreeBallColission(thisBall, bricks, bricksQTree->subdivs[0], upgrades);
+			brickQTreeBallColission(thisBall, bricks, bricksQTree->subdivs[1], upgrades);
+			brickQTreeBallColission(thisBall, bricks, bricksQTree->subdivs[2], upgrades);
+			brickQTreeBallColission(thisBall, bricks, bricksQTree->subdivs[3], upgrades);
 		}
 		else {
 			for (int i = 0; i < bricksQTree->size; i++) {
@@ -64,12 +73,13 @@ void brickQTreeBallColission(Ball* thisBall, BrickDArray* bricks, BrickQTree* br
 				float nx = max((*brick)->x, min((*brick)->x + (*brick)->w, thisBall->x));
 				float ny = max((*brick)->y, min((*brick)->y + (*brick)->h, thisBall->y));
 				if (powf(fabsf(nx - thisBall->x), 2) + powf(fabsf(ny - thisBall->y), 2) <= powf(thisBall->r, 2)) {
-					if (nx == (*brick)->x || nx == (*brick)->x + (*brick)->w) {
+					if (*(char*)thisBall->userParam & (nx == (*brick)->x || nx == (*brick)->x + (*brick)->w)) {
 						thisBall->speed[0] *= -1;
 					}
-					if (ny == (*brick)->y || ny == (*brick)->y + (*brick)->h) {
+					if (*(char*)thisBall->userParam & (ny == (*brick)->y || ny == (*brick)->y + (*brick)->h)) {
 						thisBall->speed[1] *= -1;
 					}
+					if((float)rand()/RAND_MAX <= 1.10) appendUpgradeDArray(upgrades, createUpgrade( (*brick)->x + (*brick)->w/2, (*brick)->y + ((*brick)->h)/2));
 					removeBrickDArray(bricks, brick);
 					return;
 				}
@@ -83,5 +93,6 @@ void renderBall(Ball* thisBall, double lag) {
 }
 
 void destroyBall(Ball** thisBall) {
+	free((*thisBall)->userParam);
 	destroyCircle(thisBall);
 }

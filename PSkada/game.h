@@ -9,6 +9,8 @@
 #include "Brick.h"
 #include "BrickQTree.h"
 #include "BrickDArray.h"
+#include "Upgrade.h"
+#include "UpgradeDArray.h"
 
 void game_init();
 

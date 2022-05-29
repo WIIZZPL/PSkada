@@ -8,6 +8,7 @@
 typedef struct Rectangle {
 	float x, y, w, h;
 	ALLEGRO_BITMAP* bmp;
+	void* userParam;
 } Rectangle;
 
 Rectangle* createRectangle(float x, float y, float w, float h, ALLEGRO_BITMAP* bmp);

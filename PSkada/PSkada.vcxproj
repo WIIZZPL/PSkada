@@ -164,6 +164,8 @@
     <ClCompile Include="render.c" />
     <ClCompile Include="switchScenes.c" />
     <ClCompile Include="update.c" />
+    <ClCompile Include="Upgrade.c" />
+    <ClCompile Include="UpgradeDArray.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -184,6 +186,8 @@
     <ClInclude Include="render.h" />
     <ClInclude Include="switchScenes.h" />
     <ClInclude Include="update.h" />
+    <ClInclude Include="Upgrade.h" />
+    <ClInclude Include="UpgradeDArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

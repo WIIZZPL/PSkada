@@ -10,6 +10,7 @@ typedef struct Circle {
 	float speed[2];
 	float acceleration[2];
 	ALLEGRO_BITMAP* bmp;
+	void* userParam;
 } Circle;
 
 Circle* createCircle(float x, float y, float r, float speed[2], float acceleration[2], ALLEGRO_BITMAP* bmp);

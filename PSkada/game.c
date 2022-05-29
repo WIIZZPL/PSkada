@@ -8,7 +8,10 @@ Ball* ball;
 BrickDArray* bricks;
 BrickQTree* bricksQTree;
 
+UpgradeDArray* upgrades;
+
 void game_init() {
+	srand(time(NULL));
 	palette = createPalette(6.0 / 16, 8.5 / 9, 4.0 / 16, 0.25 / 9, al_load_bitmap("palette.png"));
 	ball = createBall(0.5, 0.5, 1.0/128, al_load_bitmap("ball.png"));
 	
@@ -21,6 +24,8 @@ void game_init() {
 	appendBrickDArray(bricks, createBrick(12.5 / 16, 5.5 / 9, 1.0 / 16, 0.5 / 9, al_load_bitmap("przyciskStart.png")));
 
 	bricksQTree = createBrickQTree(0, 0, 1, 3.0/4);
+
+	upgrades = createUpgradeDArray();
 }
 
 void game_processImput(ALLEGRO_EVENT* event) {
@@ -40,8 +45,9 @@ void game_update(double t, double dt) {
 		insertBrickQTree(bricksQTree, bricks->arr+i);
 	}
 
-	updatePalette(palette, dt, keyboardState);
-	updateBall(&ball, palette, bricks, bricksQTree, dt);
+	updatePalette(palette, upgrades, dt, keyboardState);
+	updateBall(&ball, palette, bricks, bricksQTree, upgrades, dt);
+	updateUpgradeDArray(upgrades, dt);
 }
 
 void game_render(ALLEGRO_DISPLAY* display, double lag) {
@@ -50,6 +56,7 @@ void game_render(ALLEGRO_DISPLAY* display, double lag) {
 	renderBall(ball, lag);
 	renderBrickDArray(bricks);
 	renderBrickQTree(bricksQTree);
+	renderUpgradeDArray(upgrades, lag);
 }
 
 void game_del() {
@@ -58,4 +65,5 @@ void game_del() {
 
 	destroyBrickQTree(&bricksQTree);
 	destroyBrickDArray(&bricks);
+	destroyUpgradeDArray(&upgrades);
 }
