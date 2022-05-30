@@ -19,6 +19,7 @@ Ball* createBall(float x, float y, float speedX, float speedY, double penetratio
 void moveBall(Ball* thisBall, double dt) {
 	thisBall->x += thisBall->speed[0] * dt;
 	thisBall->y += thisBall->speed[1] * dt;
+	*(double*)thisBall->userParam -= dt;
 }
 
 void renderBall(Ball* thisBall, double lag) {

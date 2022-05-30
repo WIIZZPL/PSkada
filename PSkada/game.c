@@ -18,17 +18,17 @@ void game_init() {
 	palette = createPalette(6.0 / 16, 8.5 / 9, 4.0 / 16, 0.25 / 9);
 	
 	balls = createBallDArray();
-	appendBallDArray(balls, createBall(0.5, 0.5, 0.3, 0.3, 0.0));
+	float ballStartX = (float)rand() / RAND_MAX * 4.0 / 16 + 6.0 / 16; // Pilka pojawia sie losowo na paletce
+	appendBallDArray(balls, createBall(ballStartX, 8.5/9 - BALL_RADIUS, 0, 0.5, 0.0));
 
 	upgrades = createUpgradeDArray();
 
 	bricks = createBrickDArray();
-	appendBrickDArray(bricks, createBrick(0.5 / 16, 0.5 / 9));
-	appendBrickDArray(bricks, createBrick(2.5 / 16, 0.5 / 9));
-	appendBrickDArray(bricks, createBrick(4.5 / 16, 0.5 / 9));
-	appendBrickDArray(bricks, createBrick(4.5 / 16, 1.5 / 9));
-	appendBrickDArray(bricks, createBrick(2.5 / 16, 1.5 / 9));
-	appendBrickDArray(bricks, createBrick(12.5/ 16, 5.5 / 9));
+	for (int i = 0; i < 16; i++) {
+		for (int j = 0; j < 9; j++) {
+			appendBrickDArray(bricks, createBrick(1.0/16*i, 0.5/9*j));
+		}
+	}
 }
 
 void game_processImput(ALLEGRO_EVENT* event) {
@@ -53,8 +53,8 @@ void game_render(ALLEGRO_DISPLAY* display, double lag) {
 	al_draw_filled_rectangle(displayX, displayY, displayX + displayWidth, displayY + displayHeight, al_map_rgb(38, 0, 83));
 	renderPalette(palette);
 	renderBallDArray(balls, lag);
-	renderUpgradeDArray(upgrades, lag);
 	renderBrickDArray(bricks);
+	renderUpgradeDArray(upgrades, lag);
 }
 
 void game_del() {
@@ -82,6 +82,8 @@ void handleColissions(Palette* palette, BallDArray* balls, UpgradeDArray* upgrad
 			removeBallDArray(balls, balls->arr + i);
 			continue;
 		}
+		ball->x = fmax(GAME_BOUNDBOX_X + ball->r, fmin(GAME_BOUNDBOX_X + GAME_BOUNDBOX_WIDTH - ball->r, ball->x));
+		ball->y = fmax(GAME_BOUNDBOX_Y + ball->r, fmin(GAME_BOUNDBOX_Y + GAME_BOUNDBOX_HEIGHT - ball->r, ball->y));
 
 		//Palette
 		if (rectangleCircleColission(palette, ball)) {
@@ -150,11 +152,10 @@ void brickQTreeBallColission(BrickQTree* bricksQTree, BrickDArray* bricks, Ball*
 					if (nx == brick->x || nx == brick->x + brick->w) thisBall->speed[0] *= -1;
 					if (ny == brick->y || ny == brick->y + brick->h) thisBall->speed[1] *= -1;
 				}
-				
-				if(rand()/RAND_MAX <= 0.1) appendUpgradeDArray(upgrades, createUpgrade(brick->x + brick->w / 2, brick->y + brick->h / 2));
+
+				if((float)rand()/RAND_MAX <= 0.1) appendUpgradeDArray(upgrades, createUpgrade(brick->x + brick->w / 2, brick->y + brick->h / 2));
 				
 				removeBrickDArray(bricks, bricksQTree->bricks[i]);
-				return;
 			}
 		}
 	}
