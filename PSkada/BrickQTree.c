@@ -94,14 +94,23 @@ void destroyBrickQTree(BrickQTree** thisBrickQTree) {
 	*thisBrickQTree = NULL;
 }
 
-void renderBrickQTree(BrickQTree* thisBrickQTree) {
+void renderQTree(BrickQTree* thisBrickQTree) {
 	if (isSubdivedBrickQTree(thisBrickQTree)) {
-		renderBrickQTree(thisBrickQTree->subdivs[0]);
-		renderBrickQTree(thisBrickQTree->subdivs[1]);
-		renderBrickQTree(thisBrickQTree->subdivs[2]);
-		renderBrickQTree(thisBrickQTree->subdivs[3]);
+		renderQTree(thisBrickQTree->subdivs[0]);
+		renderQTree(thisBrickQTree->subdivs[1]);
+		renderQTree(thisBrickQTree->subdivs[2]);
+		renderQTree(thisBrickQTree->subdivs[3]);
 	}
 	al_draw_rectangle((thisBrickQTree->x) * displayWidth, (thisBrickQTree->y) * displayHeight,
 		(thisBrickQTree->x + thisBrickQTree->w) * displayWidth, (thisBrickQTree->y + thisBrickQTree->h) * displayHeight,
 		al_map_rgb(255, 255, 255), 1);
+}
+
+void renderBrickQTree(BrickDArray* bricks, float x, float y, float w, float h) {
+	BrickQTree* brickQT = createBrickQTree(x, y, w, h);
+
+	for (unsigned int i = 0; i < bricks->size; i++) insertBrickQTree(brickQT, bricks->arr + i);
+	renderQTree(brickQT);
+
+	destroyBrickQTree(&brickQT);
 }

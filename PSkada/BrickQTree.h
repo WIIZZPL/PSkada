@@ -21,4 +21,4 @@ void insertBrickQTree(BrickQTree* thisBrickQTree, Brick** brick);
 
 void destroyBrickQTree(BrickQTree** thisBrickQTree);
 
-void renderBrickQTree(BrickQTree* thisBrickQTree);
+void renderBrickQTree(BrickDArray* bricks, float x, float y, float w, float h);

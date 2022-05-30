@@ -25,7 +25,7 @@ void game_init() {
 
 	bricks = createBrickDArray();
 	for (int i = 0; i < 16; i++) {
-		for (int j = 0; j < 9; j++) {
+		for (int j = 8; j < 9; j++) {
 			appendBrickDArray(bricks, createBrick(1.0/16*i, 0.5/9*j));
 		}
 	}
@@ -55,6 +55,7 @@ void game_render(ALLEGRO_DISPLAY* display, double lag) {
 	renderBallDArray(balls, lag);
 	renderBrickDArray(bricks);
 	renderUpgradeDArray(upgrades, lag);
+	renderBrickQTree(bricks, GAME_BOUNDBOX_X, GAME_BOUNDBOX_Y, GAME_BOUNDBOX_WIDTH, GAME_BOUNDBOX_HEIGHT);
 }
 
 void game_del() {
@@ -141,9 +142,11 @@ void brickQTreeBallColission(BrickQTree* bricksQTree, BrickDArray* bricks, Ball*
 		brickQTreeBallColission(bricksQTree->subdivs[2], bricks, thisBall, upgrades);
 		brickQTreeBallColission(bricksQTree->subdivs[3], bricks, thisBall, upgrades);
 	} else {
+		//printf("%lf Checking colissions in %p\n", al_get_time(), bricksQTree);
 		for (int i = 0; i < bricksQTree->size; i++) {
+			if (bricksQTree->bricks[i] >= bricks->arr+bricks->size) continue;
 			Brick* brick = *bricksQTree->bricks[i];
-			if (!brick) continue;
+			//printf("%lf Checking colission with %p\n", al_get_time(), brick);
 			nx = max(brick->x, min(brick->x + brick->w, thisBall->x));
 			ny = max(brick->y, min(brick->y + brick->h, thisBall->y));
 			if (powf(fabsf(nx - thisBall->x), 2) + powf(fabsf(ny - thisBall->y), 2) <= powf(thisBall->r, 2)) {
@@ -154,7 +157,8 @@ void brickQTreeBallColission(BrickQTree* bricksQTree, BrickDArray* bricks, Ball*
 				}
 
 				if((float)rand()/RAND_MAX <= 0.1) appendUpgradeDArray(upgrades, createUpgrade(brick->x + brick->w / 2, brick->y + brick->h / 2));
-				
+
+				//printf("%lf Removed %p\n", al_get_time(), brick);
 				removeBrickDArray(bricks, bricksQTree->bricks[i]);
 			}
 		}
