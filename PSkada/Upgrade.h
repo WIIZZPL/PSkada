@@ -5,9 +5,11 @@
   
 typedef Circle Upgrade;
 
+#define UPGRADE_RADIUS (1.0/128)
+
 Upgrade* createUpgrade(float x, float y);
 
-int updateUpgrade(Upgrade* thisUpgrade, double dt); // Retruns 1 if it needs deletion
+void moveUpgrade(Upgrade* thisUpgrade, double dt);
 void renderUpgrade(Upgrade* thisUpgrade, double lag);
 
 void destroyUpgrade(Upgrade** thisUpgrade);

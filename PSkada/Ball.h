@@ -1,19 +1,14 @@
 #pragma once
 
 #include "circle.h"
-#include "Palette.h"
-#include "Brick.h"
-#include "BrickQTree.h"
-#include "Upgrade.h"
-#include "UpgradeDArray.h"
-#include <math.h>
 
 typedef Circle Ball;
 
-Ball* createBall(float x, float y, float r, ALLEGRO_BITMAP* bmp);
+#define BALL_RADIUS (1.0/128)
 
-void updateBall(Ball** thisBall, Palette* palette, BrickDArray* bricks, BrickQTree* bricksQTree, UpgradeDArray* upgrades, double dt);
+Ball* createBall(float x, float y, float speedX, float speedY, double penetrationTimer);
+
+void moveBall(Ball* thisBall, double dt);
 void renderBall(Ball* thisBall, double lag);
-void brickQTreeBallColission(Ball* thisBall, BrickDArray* bricks, BrickQTree* bricksQTree, UpgradeDArray* upgrades);
 
 void destroyBall(Ball** thisBall);

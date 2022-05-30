@@ -1,16 +1,11 @@
 #include "Brick.h"
 
-Brick* createBrick(float x, float y, float w, float h, ALLEGRO_BITMAP* bmp) {
-	Brick* ptr = createRectangle(x, y, w, h, bmp);
-	return ptr;
-}
-
-Brick* copyBrick(Brick* brick) {
-	return copyRectangle(brick);
+Brick* createBrick(float x, float y) {
+	ALLEGRO_BITMAP* bmp = al_load_bitmap("przyciskStart.png");
+	return createRectangle(x, y, BRICK_WIDTH, BRICK_HEIGHT, bmp);
 }
 
 void renderBrick(Brick* thisBrick) {
-	if (!thisBrick) return;
 	renderRectangle(thisBrick);
 }
 

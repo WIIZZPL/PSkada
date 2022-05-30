@@ -1,5 +1,7 @@
 #include "UpgradeDArray.h"
 
+void shrinkUpgradeDArray(UpgradeDArray* thisUpgradeDArray);
+
 UpgradeDArray* createUpgradeDArray() {
 	UpgradeDArray* newUpgradeDArray = (UpgradeDArray*)malloc(sizeof(UpgradeDArray));
 	if (!newUpgradeDArray) exit(138);
@@ -37,10 +39,9 @@ void shrinkUpgradeDArray(UpgradeDArray* thisUpgradeDArray) {
 	}
 }
 
-void updateUpgradeDArray(UpgradeDArray* thisUpgradeDArray, double dt) {
+void moveUpgradeDArray(UpgradeDArray* thisUpgradeDArray, double dt) {
 	for (unsigned int i = 0; i < thisUpgradeDArray->size; i++) {
-		if (updateUpgrade(thisUpgradeDArray->arr[i], dt))
-			removeUpgradeDArray(thisUpgradeDArray, thisUpgradeDArray->arr + i);
+		moveUpgrade(thisUpgradeDArray->arr[i], dt);
 	}
 }
 

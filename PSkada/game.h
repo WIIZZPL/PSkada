@@ -2,15 +2,22 @@
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_primitives.h>
+#include <math.h>
 #include "switchScenes.h"
 
 #include "Palette.h"
 #include "Ball.h"
+#include "BallDArray.h"
+#include "Upgrade.h"
+#include "UpgradeDArray.h"
 #include "Brick.h"
 #include "BrickQTree.h"
 #include "BrickDArray.h"
-#include "Upgrade.h"
-#include "UpgradeDArray.h"
+
+#define GAME_BOUNDBOX_X 0.0
+#define GAME_BOUNDBOX_Y 0.0
+#define GAME_BOUNDBOX_WIDTH 1.0
+#define GAME_BOUNDBOX_HEIGHT 1.0
 
 void game_init();
 

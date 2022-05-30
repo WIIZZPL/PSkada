@@ -5,7 +5,7 @@ Upgrade* createUpgrade(float x, float y) {
 	if (x > 0.5) speed[0] *= -1;
 	float acceleration[2] = { 0.0, 1.0 };
 	
-	char upgradeType = rand()%5; //types of upgrades
+	char upgradeType = rand()%6; //types of upgrades
 
 	/*
 	0 - Penetrating ball
@@ -13,6 +13,7 @@ Upgrade* createUpgrade(float x, float y) {
 	2 - Thinner Palette
 	3 - Faster balls
 	4 - Slower balls
+	5 - Duplicate balls
 	*/
 
 	char bmpFileName[16];
@@ -20,7 +21,7 @@ Upgrade* createUpgrade(float x, float y) {
 	ALLEGRO_BITMAP* bmp = al_load_bitmap(bmpFileName);
 	if (!bmp) exit(138);
 
-	Upgrade* newUpgrade = createCircle(x, y, 1.0/128, speed, acceleration, bmp);
+	Upgrade* newUpgrade = createCircle(x, y, UPGRADE_RADIUS, speed, acceleration, bmp);
 
 	newUpgrade->userParam = (char*)malloc(sizeof(char));
 	if (!newUpgrade->userParam) exit(138);
@@ -29,16 +30,11 @@ Upgrade* createUpgrade(float x, float y) {
 	return newUpgrade;
 }
 
-int updateUpgrade(Upgrade* thisUpgrade, double dt) {
+void moveUpgrade(Upgrade* thisUpgrade, double dt) {
 	thisUpgrade->speed[0] += thisUpgrade->acceleration[0] * dt;
 	thisUpgrade->speed[1] += thisUpgrade->acceleration[1] * dt;
 	thisUpgrade->x += thisUpgrade->speed[0] * dt;
 	thisUpgrade->y += thisUpgrade->speed[1] * dt;
-
-	if (thisUpgrade->x - thisUpgrade->r > 1 || thisUpgrade->x + thisUpgrade->r < 0 ||
-		thisUpgrade->y - thisUpgrade->r > 1 || thisUpgrade->y + thisUpgrade->r < 0)
-		return 1;
-	return 0;
 }
 
 void renderUpgrade(Upgrade* thisUpgrade, double lag) {

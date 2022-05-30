@@ -4,7 +4,10 @@
 
 typedef Rectangle Brick;
 
-Brick* createBrick(float x, float y, float w, float h, ALLEGRO_BITMAP* bmp);
+#define BRICK_WIDTH (1.0/16)
+#define BRICK_HEIGHT (0.5/9)
+
+Brick* createBrick(float x, float y);
 
 void renderBrick(Brick* thisBrick);
 

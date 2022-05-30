@@ -2,8 +2,9 @@
 
 #include "Brick.h"
 #include "BrickDArray.h"
+#include <allegro5/allegro_primitives.h>
 
-#define BrickQTreeCapacity 4
+#define BRICK_QTREE_CAP 4
 
 typedef struct BrickQTree {
 	float x, y, w, h;
@@ -13,12 +14,10 @@ typedef struct BrickQTree {
 } BrickQTree;
 
 BrickQTree* createBrickQTree(float x, float y, float w, float h);
-Brick* copyBrick(Brick* brick);
 
 void subdevideBrickQTree(BrickQTree* thisBrickQTree);
 int isSubdivedBrickQTree(BrickQTree* thisBrickQTree);
 void insertBrickQTree(BrickQTree* thisBrickQTree, Brick** brick);
-void clearBrickQTree(BrickQTree* thisBrickQTree);
 
 void destroyBrickQTree(BrickQTree** thisBrickQTree);
 

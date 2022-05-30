@@ -84,6 +84,9 @@
     <ClCompile Include="UpgradeDArray.c">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="BallDArray.c">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -138,6 +141,9 @@
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="UpgradeDArray.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BallDArray.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>

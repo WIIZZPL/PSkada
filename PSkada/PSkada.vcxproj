@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.c" />
+    <ClCompile Include="BallDArray.c" />
     <ClCompile Include="Brick.c" />
     <ClCompile Include="BrickDArray.c" />
     <ClCompile Include="BrickQTree.c" />
@@ -172,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="BallDArray.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="BrickDArray.h" />
     <ClInclude Include="BrickQTree.h" />

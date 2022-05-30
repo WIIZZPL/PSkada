@@ -1,5 +1,7 @@
 #include "BrickDArray.h"
 
+void shrinkBrickDArray(BrickDArray* thisBrickDArray);
+
 BrickDArray* createBrickDArray() {
 	BrickDArray* newBrickDArray = (BrickDArray*)malloc(sizeof(BrickDArray));
 	if (!newBrickDArray) exit(138);

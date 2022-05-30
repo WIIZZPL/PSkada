@@ -8,7 +8,7 @@ BrickQTree* createBrickQTree(float x, float y, float w, float h) {
 	newBrickQTree->w = w;
 	newBrickQTree->h = h;
 	newBrickQTree->size = 0;
-	newBrickQTree->bricks = calloc(BrickQTreeCapacity, sizeof(Brick*));
+	newBrickQTree->bricks = calloc(BRICK_QTREE_CAP, sizeof(Brick*));
 	newBrickQTree->subdivs = NULL;
 	return newBrickQTree;
 }
@@ -47,7 +47,7 @@ void insertBrickQTree(BrickQTree* thisBrickQTree, Brick** brick) {
 		return;
 	}
 	//Insertion part proper
-	if (thisBrickQTree->size < BrickQTreeCapacity && thisBrickQTree->bricks != NULL) {
+	if (thisBrickQTree->size < BRICK_QTREE_CAP && thisBrickQTree->bricks != NULL) {
 		thisBrickQTree->bricks[thisBrickQTree->size++] = brick;
 	}
 	else {
@@ -61,14 +61,14 @@ void insertBrickQTree(BrickQTree* thisBrickQTree, Brick** brick) {
 
 void clearBrickQTree(BrickQTree* thisBrickQTree) {
 	if (isSubdivedBrickQTree(thisBrickQTree)) {
-		destroyBrickQTree(thisBrickQTree->subdivs+0);
-		destroyBrickQTree(thisBrickQTree->subdivs+1);
-		destroyBrickQTree(thisBrickQTree->subdivs+2);
-		destroyBrickQTree(thisBrickQTree->subdivs+3);
+		destroyBrickQTree(thisBrickQTree->subdivs + 0);
+		destroyBrickQTree(thisBrickQTree->subdivs + 1);
+		destroyBrickQTree(thisBrickQTree->subdivs + 2);
+		destroyBrickQTree(thisBrickQTree->subdivs + 3);
 		free(thisBrickQTree->subdivs);
 		thisBrickQTree->subdivs = NULL;
 	}
-	else{
+	else {
 		for (int i = 0; i < thisBrickQTree->size; i++) {
 			thisBrickQTree->bricks[i] = NULL;
 		}
@@ -78,13 +78,22 @@ void clearBrickQTree(BrickQTree* thisBrickQTree) {
 
 void destroyBrickQTree(BrickQTree** thisBrickQTree) {
 	if (!*thisBrickQTree) return;
-	clearBrickQTree(*thisBrickQTree);
-	free((*thisBrickQTree)->bricks);
+
+	if (isSubdivedBrickQTree(*thisBrickQTree)) {
+		destroyBrickQTree((*thisBrickQTree)->subdivs+0);
+		destroyBrickQTree((*thisBrickQTree)->subdivs+1);
+		destroyBrickQTree((*thisBrickQTree)->subdivs+2);
+		destroyBrickQTree((*thisBrickQTree)->subdivs+3);
+		free((*thisBrickQTree)->subdivs);
+	}
+	else {
+		free((*thisBrickQTree)->bricks);
+	}
+
 	free(*thisBrickQTree);
 	*thisBrickQTree = NULL;
 }
 
-#include <allegro5/allegro_primitives.h>
 void renderBrickQTree(BrickQTree* thisBrickQTree) {
 	if (isSubdivedBrickQTree(thisBrickQTree)) {
 		renderBrickQTree(thisBrickQTree->subdivs[0]);
