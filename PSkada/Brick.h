@@ -1,6 +1,7 @@
 #pragma once
 
 #include "rectangle.h"
+#include <stdio.h>
 
 typedef Rectangle Brick;
 

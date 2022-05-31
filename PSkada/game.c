@@ -2,6 +2,8 @@
 
 char keyboardState[ALLEGRO_KEY_MAX];
 
+double gameTimer;
+
 Palette* palette;
 BallDArray* balls;
 UpgradeDArray* upgrades;
@@ -17,6 +19,9 @@ void game_init() {
 	srand(time(NULL));
 		background = al_load_bitmap("game_background.png");
 	if (!background) exit(138);
+	
+	gameTimer = al_get_time();
+	
 	palette = createPalette(6.0 / 16, 8.5 / 9, 4.0 / 16, 0.25 / 9);
 	
 	balls = createBallDArray();
@@ -27,7 +32,7 @@ void game_init() {
 
 	bricks = createBrickDArray();
 	for (int i = 0; i < 16; i++) {
-		for (int j = 8; j < 9; j++) {
+		for (int j = 2; j < 9; j++) {
 			appendBrickDArray(bricks, createBrick(1.0/16*i, 0.5/9*j));
 		}
 	}
@@ -45,10 +50,36 @@ void game_processImput(ALLEGRO_EVENT* event) {
 }
 
 void game_update(double t, double dt) {
+	gameTimer += dt;
 	movePalette(palette, dt, keyboardState);
 	moveBallDArray(balls, dt);
 	moveUpgradeDArray(upgrades, dt);
 	handleColissions(palette, balls, upgrades, bricks);
+	if (!bricks->size) {
+		printf("Time: %lf\n", gameTimer);
+		thisScore = llrint(1000*240/gameTimer);
+		printf("SCORE: %llu\n", thisScore);
+		FILE* plik;
+		unsigned long long highScores[5];
+		for (int i = 0; i < 5; i++) highScores[i] = 0LL;
+		if (!fopen_s(&plik, "Scores.bin", "rb+")) {
+			fread(highScores, sizeof(unsigned long long), 5, plik);
+			int i = 0;
+			while (highScores[i] > thisScore && i < 5) i++;
+			for (int j = 4; j > i; j--) highScores[j] = highScores[j - 1];
+			highScores[i] = thisScore;
+		}
+		else {
+			fopen_s(&plik, "Scores.bin", "wb");
+			highScores[0] = thisScore;
+		}
+		for (int i = 0; i < 5; i++) printf("%llu\n", highScores[i]);
+		fflush(plik);
+		fwrite(highScores, sizeof(unsigned long long), 5, plik);
+		fclose(plik);
+		
+		switchScenes(2);
+	} else if (!balls->size) switchScenes(0);
 }
 
 void game_render(ALLEGRO_DISPLAY* display, double lag) {
@@ -58,7 +89,7 @@ void game_render(ALLEGRO_DISPLAY* display, double lag) {
 	renderBallDArray(balls, lag);
 	renderBrickDArray(bricks);
 	renderUpgradeDArray(upgrades, lag);
-	renderBrickQTree(bricks, GAME_BOUNDBOX_X, GAME_BOUNDBOX_Y, GAME_BOUNDBOX_WIDTH, GAME_BOUNDBOX_HEIGHT);
+	//renderBrickQTree(bricks, GAME_BOUNDBOX_X, GAME_BOUNDBOX_Y, GAME_BOUNDBOX_WIDTH, GAME_BOUNDBOX_HEIGHT);
 }
 
 void game_del() {

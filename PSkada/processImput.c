@@ -44,11 +44,11 @@ void processImput() {
 		case 1: //gra
 			game_processImput(&event);
 			break;
-		case 2: //end game
+		case 2: //win game
 			break;
-		case 3: //highscores
+		case 3: //loose game
 			break;
-		case 4: //opcje
+		case 4: //high scores
 			break;
 		case 5: //credits
 			break;

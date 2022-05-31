@@ -17,13 +17,13 @@ void render(ALLEGRO_DISPLAY* display, double lag) {
 	case 1: //Gra
 		game_render(display, lag);
 		break;
-	case 2: //End game
+	case 2: //Win game
 		al_clear_to_color(al_map_rgb(0, 255, 255));
 		break;
-	case 3: //Highscores
+	case 3: //Loose game
 		al_clear_to_color(al_map_rgb(255, 0, 0));
 		break;
-	case 4: //Opcje
+	case 4: //Highscores
 		al_clear_to_color(al_map_rgb(255, 0, 255));
 		break;
 	case 5: //Credits
