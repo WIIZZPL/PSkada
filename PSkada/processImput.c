@@ -2,6 +2,7 @@
 
 #include "menu.h"
 #include "game.h"
+#include "help.h"
 
 ALLEGRO_EVENT_QUEUE* imputQueue;
 
@@ -10,6 +11,7 @@ void processImput_init(ALLEGRO_DISPLAY* display) {
 	
 	al_install_keyboard();
 	al_install_mouse();
+	
 
 	al_register_event_source(imputQueue, al_get_display_event_source(display));
 	al_register_event_source(imputQueue, al_get_keyboard_event_source());
@@ -48,7 +50,8 @@ void processImput() {
 			break;
 		case 3: //loose game
 			break;
-		case 4: //high scores
+		case 4: //help
+			help_processImput(&event);
 			break;
 		case 5: //credits
 			break;
