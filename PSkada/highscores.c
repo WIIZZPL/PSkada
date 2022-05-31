@@ -42,16 +42,14 @@ void highscores_render(ALLEGRO_DISPLAY* display) {
 	renderButton(buttonBack);
 	renderRectangle(scoresBoard);
 	
+	int fontSize = 1.0 / 9 * displayHeight;
+	int textX = displayX + displayWidth / 2;
+	ALLEGRO_FONT* font = al_load_ttf_font("bahnschrift.ttf", fontSize, 0);
 	for (int i = 0; i < 5; i++) {
-		int fontSize = 1.0/9 * displayHeight;
-		int textX = displayX+displayWidth/2;
-		int textY = displayY+displayHeight*(1.5/9 + 1.0/9*i);
-		ALLEGRO_FONT* font = al_load_ttf_font("bahnschrift.ttf", fontSize, 0);
-
+		int textY = displayY + displayHeight * (1.5 / 9 + 1.0 / 9 * i);
 		al_draw_text(font, al_map_rgb(255, 255, 255), textX, textY, ALLEGRO_ALIGN_CENTRE, highscoresText[i]);
-
-		al_destroy_font(font);
 	}
+	al_destroy_font(font);
 }
 
 void highscores_update(double t, double dt) {
