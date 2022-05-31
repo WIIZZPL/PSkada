@@ -5,6 +5,7 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
 
+
 #include "GLOBALVARS.h"
 #include "processImput.h"
 #include "update.h"
@@ -12,7 +13,8 @@
 #include "switchScenes.h"
 
 int main(){
-    
+	
+
     //INITIALISE
 	
 	if (!al_init()) return;
@@ -21,6 +23,7 @@ int main(){
 	if (!al_init_ttf_addon()) return;
 	if (!al_init_primitives_addon()) return;
 
+	
 	//Display & window
 	displayWidth = 1280;
 	displayHeight = 720;
@@ -44,7 +47,7 @@ int main(){
 	double FPS[10];
 	int FPSi = 0;
 	double lastFrameTime = al_current_time(), deltaFrameTime = 0, accumulatedTime = 0;
-
+	
 	while (running){
 		deltaFrameTime = al_current_time() - lastFrameTime;
 		lastFrameTime += deltaFrameTime;
@@ -80,7 +83,7 @@ int main(){
 	}
 
 	//UNINITIALISE
-
+	
 	scene_del();
 
 	processImput_del(display);

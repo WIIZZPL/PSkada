@@ -6,6 +6,7 @@ Palette* palette;
 BallDArray* balls;
 UpgradeDArray* upgrades;
 BrickDArray* bricks;
+ALLEGRO_BITMAP* background;
 
 void handleColissions(Palette* palette, BallDArray* balls, UpgradeDArray* upgrades, BrickDArray* bricks);
 int rectangleCircleColission(Rectangle* thisRectangle, Circle* thisCircle);
@@ -14,7 +15,8 @@ void executeUpgrade(char upCode, Palette* palette, BallDArray* balls);
 
 void game_init() {
 	srand(time(NULL));
-	
+		background = al_load_bitmap("game_background.png");
+	if (!background) exit(138);
 	palette = createPalette(6.0 / 16, 8.5 / 9, 4.0 / 16, 0.25 / 9);
 	
 	balls = createBallDArray();
@@ -50,7 +52,8 @@ void game_update(double t, double dt) {
 }
 
 void game_render(ALLEGRO_DISPLAY* display, double lag) {
-	al_draw_filled_rectangle(displayX, displayY, displayX + displayWidth, displayY + displayHeight, al_map_rgb(38, 0, 83));
+	//al_draw_filled_rectangle(displayX, displayY, displayX + displayWidth, displayY + displayHeight, al_map_rgb(38, 0, 83));
+	al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background), displayX, displayY, displayWidth, displayHeight, 0);
 	renderPalette(palette);
 	renderBallDArray(balls, lag);
 	renderBrickDArray(bricks);
@@ -63,6 +66,7 @@ void game_del() {
 	destroyBallDArray(&balls);
 	destroyUpgradeDArray(&upgrades);
 	destroyBrickDArray(&bricks);
+	al_destroy_bitmap(background);
 }
 
 void handleColissions(Palette* palette, BallDArray* balls, UpgradeDArray* upgrades, BrickDArray* bricks) {
