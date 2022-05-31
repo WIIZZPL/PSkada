@@ -3,6 +3,7 @@
 #include "GLOBALVARS.h"
 #include "menu.h"
 #include "game.h"
+#include "help.h"
 
 void switchScenes(int newSceneNumber) {
 	scene_del(); // Deaktywacja aktualnej sceny
@@ -23,6 +24,7 @@ void scene_init() {
 	case 3:
 		break;
 	case 4:
+		help_init();
 		break;
 	case 5:
 		break;

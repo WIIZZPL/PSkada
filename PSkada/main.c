@@ -4,6 +4,7 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
 
 
 #include "GLOBALVARS.h"
@@ -22,6 +23,7 @@ int main(){
 	if (!al_init_font_addon()) return;
 	if (!al_init_ttf_addon()) return;
 	if (!al_init_primitives_addon()) return;
+
 
 	
 	//Display & window

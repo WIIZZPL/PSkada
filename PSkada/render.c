@@ -2,6 +2,7 @@
 
 #include "menu.h"
 #include "game.h"
+#include "help.h"
 
 //Funkcja sluzy do wybrania funkcji renderowania danej sceny.
 //Kazda owa funkcja potrzebuje jako parametr display oraz lag.
@@ -23,8 +24,8 @@ void render(ALLEGRO_DISPLAY* display, double lag) {
 	case 3: //Highscores
 		al_clear_to_color(al_map_rgb(255, 0, 0));
 		break;
-	case 4: //Opcje
-		al_clear_to_color(al_map_rgb(255, 0, 255));
+	case 4: //Help
+		help_render(display);
 		break;
 	case 5: //Credits
 		al_clear_to_color(al_map_rgb(255, 255, 0));
