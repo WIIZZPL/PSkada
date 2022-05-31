@@ -87,6 +87,12 @@
     <ClCompile Include="BallDArray.c">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="help.c">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="highscores.c">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -145,6 +151,12 @@
     </ClInclude>
     <ClInclude Include="BallDArray.h">
       <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="help.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="highscores.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -83,6 +83,8 @@
     <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
     <Allegro_AddonFont>true</Allegro_AddonFont>
     <Allegro_AddonColor>true</Allegro_AddonColor>
+    <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -91,6 +93,8 @@
     <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
     <Allegro_AddonColor>true</Allegro_AddonColor>
     <Allegro_AddonFont>true</Allegro_AddonFont>
+    <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -157,6 +161,8 @@
     <ClCompile Include="Button.c" />
     <ClCompile Include="circle.c" />
     <ClCompile Include="game.c" />
+    <ClCompile Include="help.c" />
+    <ClCompile Include="highscores.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="Palette.c" />
@@ -181,6 +187,8 @@
     <ClInclude Include="circle.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GLOBALVARS.h" />
+    <ClInclude Include="help.h" />
+    <ClInclude Include="highscores.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="Palette.h" />
     <ClInclude Include="processImput.h" />

@@ -2,6 +2,8 @@
 
 #include "menu.h"
 #include "game.h"
+
+
 #include "help.h"
 #include "highscores.h"
 
@@ -13,7 +15,6 @@ void processImput_init(ALLEGRO_DISPLAY* display) {
 	al_install_keyboard();
 	al_install_mouse();
 	
-
 	al_register_event_source(imputQueue, al_get_display_event_source(display));
 	al_register_event_source(imputQueue, al_get_keyboard_event_source());
 	al_register_event_source(imputQueue, al_get_mouse_event_source());

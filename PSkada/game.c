@@ -9,9 +9,7 @@ BallDArray* balls;
 UpgradeDArray* upgrades;
 BrickDArray* bricks;
 ALLEGRO_BITMAP* background;
-ALLEGRO_SAMPLE* gameTheme1;
-ALLEGRO_SAMPLE* gameTheme2;
-ALLEGRO_SAMPLE* gameTheme3;
+ALLEGRO_SAMPLE* gameTheme;
 
 void handleColissions(Palette* palette, BallDArray* balls, UpgradeDArray* upgrades, BrickDArray* bricks);
 int rectangleCircleColission(Rectangle* thisRectangle, Circle* thisCircle);
@@ -20,24 +18,17 @@ void executeUpgrade(char upCode, Palette* palette, BallDArray* balls);
 
 void game_init() {
 	srand(time(NULL));
-		background = al_load_bitmap("game_background.png");
+		
+	background = al_load_bitmap("game_background.png");
 	if (!background) exit(138);
-	if (!al_install_audio()) return;
-	if (!al_init_acodec_addon()) return;
 	
 	//Music
-	al_reserve_samples(3);
-	gameTheme1 = al_load_sample("game_1_slower.wav");
-	gameTheme2 = al_load_sample("game_2.wav");
-	gameTheme3 = al_load_sample("game_3_slower.wav");
-	int musicNumber = rand() % 3;
-		if(musicNumber==0)
-		al_play_sample(gameTheme1 , 0.4, 0, 1.0, ALLEGRO_PLAYMODE_LOOP, 0);
-		else if(musicNumber==1)
-		al_play_sample(gameTheme2, 0.4, 0, 1.0, ALLEGRO_PLAYMODE_LOOP, 0);
-		else
-		al_play_sample(gameTheme3, 0.4, 0, 1.0, ALLEGRO_PLAYMODE_LOOP, 0);
-
+	al_reserve_samples(1);
+	char sampleFileName[16];
+	snprintf(sampleFileName, 16, "gameTheme%d.mp3", rand()%3);
+	gameTheme = al_load_sample(sampleFileName);
+	
+	if(gameTheme) al_play_sample(gameTheme, 0.4, 0, 1.0, ALLEGRO_PLAYMODE_LOOP, 0);
 
 	gameTimer = al_get_time();
 	
@@ -75,9 +66,9 @@ void game_update(double t, double dt) {
 	moveUpgradeDArray(upgrades, dt);
 	handleColissions(palette, balls, upgrades, bricks);
 	if (!bricks->size) {
-		printf("Time: %lf\n", gameTimer);
+		//printf("Time: %lf\n", gameTimer);
 		thisScore = llrint(1000*240/gameTimer);
-		printf("SCORE: %llu\n", thisScore);
+		//printf("SCORE: %llu\n", thisScore);
 		FILE* plik;
 		unsigned long long highScores[5];
 		for (int i = 0; i < 5; i++) highScores[i] = 0LL;
@@ -92,7 +83,7 @@ void game_update(double t, double dt) {
 			fopen_s(&plik, "Scores.bin", "wb");
 			highScores[0] = thisScore;
 		}
-		for (int i = 0; i < 5; i++) printf("%llu\n", highScores[i]);
+		//for (int i = 0; i < 5; i++) printf("%llu\n", highScores[i]);
 		fflush(plik);
 		fwrite(highScores, sizeof(unsigned long long), 5, plik);
 		fclose(plik);
@@ -116,9 +107,7 @@ void game_del() {
 	destroyBallDArray(&balls);
 	destroyUpgradeDArray(&upgrades);
 	destroyBrickDArray(&bricks);
-	al_destroy_sample(gameTheme1);
-	al_destroy_sample(gameTheme2);
-	al_destroy_sample(gameTheme3);
+	al_destroy_sample(gameTheme);
 	al_destroy_bitmap(background);
 }
 

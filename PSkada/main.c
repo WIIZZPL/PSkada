@@ -4,6 +4,8 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
 
 
@@ -16,9 +18,6 @@
 
 
 int main(){
-
-
-
     //INITIALISE
 	
 	if (!al_init()) return;
@@ -26,6 +25,8 @@ int main(){
 	if (!al_init_font_addon()) return;
 	if (!al_init_ttf_addon()) return;
 	if (!al_init_primitives_addon()) return;
+	if (!al_install_audio()) return;
+	if (!al_init_acodec_addon()) return;
 	
 	//Display & window
 	displayWidth = 1280;

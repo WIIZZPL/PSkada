@@ -3,6 +3,10 @@
 #include "menu.h"
 #include "game.h"
 
+
+#include "help.h"
+#include "highscores.h"
+
 void update(double t, double dt) {
 
 	switch (sceneNumber) {
@@ -16,9 +20,11 @@ void update(double t, double dt) {
 		break;
 	case 3: //Loose game
 		break;
-	case 4: //Highscores
+	case 4: //Help
+		help_update(t, dt);
 		break;
-	case 5: //Credits
+	case 5: //Highscores
+		highscores_update(t, dt);
 		break;
 	default:
 		break;
