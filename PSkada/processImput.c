@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "game.h"
 #include "help.h"
+#include "highscores.h"
 
 ALLEGRO_EVENT_QUEUE* imputQueue;
 
@@ -53,7 +54,8 @@ void processImput() {
 		case 4: //help
 			help_processImput(&event);
 			break;
-		case 5: //credits
+		case 5: //highscores
+			highscores_processImput(&event);
 			break;
 		default:
 			break;

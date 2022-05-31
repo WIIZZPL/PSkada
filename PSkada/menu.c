@@ -5,10 +5,17 @@ Button* buttonHighscore;
 Button* buttonHelp;
 Button* buttonQuit;
 ALLEGRO_BITMAP* background;
-
+ALLEGRO_SAMPLE* menuTheme;
+float volume=0.4; //music volume
 int menu_init() {
 	background = al_load_bitmap("menu_background1.png");
 	if (!background) exit(138);
+	//Music
+	if (!al_install_audio()) return;
+	if (!al_init_acodec_addon()) return;
+	al_reserve_samples(1);
+	menuTheme = al_load_sample("menu_slower.wav");
+	al_play_sample(menuTheme, 0.4, 0, 1.0, ALLEGRO_PLAYMODE_LOOP, 0);
 
 	buttonStart = createRectangle(5.0 / 16, 4.0 / 9, 6.0 / 16, 1.0 / 9, al_load_bitmap("przyciskStart.png"));
 	if (!buttonStart) return 0;
@@ -27,8 +34,12 @@ int menu_init() {
 
 void menu_processImput(ALLEGRO_EVENT* event) {
 	if (event->type == ALLEGRO_EVENT_MOUSE_BUTTON_UP && event->mouse.button == 1) {
-		if (pointCollisionButton(buttonStart, event->mouse.x, event->mouse.y)) switchScenes(1);
-		else if (pointCollisionButton(buttonHighscore, event->mouse.x, event->mouse.y)) switchScenes(3);
+		if (pointCollisionButton(buttonStart, event->mouse.x, event->mouse.y))
+		{
+			al_destroy_sample(menuTheme); //destroying music before start a game
+			switchScenes(1);
+		}
+		else if (pointCollisionButton(buttonHighscore, event->mouse.x, event->mouse.y)) switchScenes(5);
 		else if (pointCollisionButton(buttonHelp, event->mouse.x, event->mouse.y)) switchScenes(4);
 		else if (pointCollisionButton(buttonQuit, event->mouse.x, event->mouse.y)) running = 0;
 	}
@@ -52,4 +63,5 @@ void menu_del() {
 	destroyRectangle(&buttonHelp);
 	destroyRectangle(&buttonQuit);
 	al_destroy_bitmap(background);
+
 }

@@ -2,9 +2,11 @@
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <math.h>
-#include "switchScenes.h"
 
+#include "switchScenes.h"
 #include "Palette.h"
 #include "Ball.h"
 #include "BallDArray.h"

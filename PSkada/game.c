@@ -9,6 +9,9 @@ BallDArray* balls;
 UpgradeDArray* upgrades;
 BrickDArray* bricks;
 ALLEGRO_BITMAP* background;
+ALLEGRO_SAMPLE* gameTheme1;
+ALLEGRO_SAMPLE* gameTheme2;
+ALLEGRO_SAMPLE* gameTheme3;
 
 void handleColissions(Palette* palette, BallDArray* balls, UpgradeDArray* upgrades, BrickDArray* bricks);
 int rectangleCircleColission(Rectangle* thisRectangle, Circle* thisCircle);
@@ -19,7 +22,23 @@ void game_init() {
 	srand(time(NULL));
 		background = al_load_bitmap("game_background.png");
 	if (!background) exit(138);
+	if (!al_install_audio()) return;
+	if (!al_init_acodec_addon()) return;
 	
+	//Music
+	al_reserve_samples(3);
+	gameTheme1 = al_load_sample("game_1_slower.wav");
+	gameTheme2 = al_load_sample("game_2.wav");
+	gameTheme3 = al_load_sample("game_3_slower.wav");
+	int musicNumber = rand() % 3;
+		if(musicNumber==0)
+		al_play_sample(gameTheme1 , 0.4, 0, 1.0, ALLEGRO_PLAYMODE_LOOP, 0);
+		else if(musicNumber==1)
+		al_play_sample(gameTheme2, 0.4, 0, 1.0, ALLEGRO_PLAYMODE_LOOP, 0);
+		else
+		al_play_sample(gameTheme3, 0.4, 0, 1.0, ALLEGRO_PLAYMODE_LOOP, 0);
+
+
 	gameTimer = al_get_time();
 	
 	palette = createPalette(6.0 / 16, 8.5 / 9, 4.0 / 16, 0.25 / 9);
@@ -80,10 +99,10 @@ void game_update(double t, double dt) {
 		
 		switchScenes(2);
 	} else if (!balls->size) switchScenes(0);
+	
 }
 
 void game_render(ALLEGRO_DISPLAY* display, double lag) {
-	//al_draw_filled_rectangle(displayX, displayY, displayX + displayWidth, displayY + displayHeight, al_map_rgb(38, 0, 83));
 	al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background), displayX, displayY, displayWidth, displayHeight, 0);
 	renderPalette(palette);
 	renderBallDArray(balls, lag);
@@ -97,6 +116,9 @@ void game_del() {
 	destroyBallDArray(&balls);
 	destroyUpgradeDArray(&upgrades);
 	destroyBrickDArray(&bricks);
+	al_destroy_sample(gameTheme1);
+	al_destroy_sample(gameTheme2);
+	al_destroy_sample(gameTheme3);
 	al_destroy_bitmap(background);
 }
 
