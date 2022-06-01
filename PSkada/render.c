@@ -2,8 +2,7 @@
 
 #include "menu.h"
 #include "game.h"
-
-
+#include "endgame.h"
 #include "help.h"
 #include "highscores.h"
 
@@ -22,7 +21,7 @@ void render(ALLEGRO_DISPLAY* display, double lag) {
 		game_render(display, lag);
 		break;
 	case 2: //Win game
-		al_clear_to_color(al_map_rgb(0, 255, 255));
+		endgame_render(display);
 		break;
 	case 3: //Loose game
 		al_clear_to_color(al_map_rgb(255, 0, 0));

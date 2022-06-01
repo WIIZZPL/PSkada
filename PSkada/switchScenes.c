@@ -5,6 +5,7 @@
 #include "game.h"
 #include "help.h"
 #include "highscores.h"
+#include "endgame.h"
 
 void switchScenes(int newSceneNumber) {
 	scene_del(); // Deaktywacja aktualnej sceny
@@ -20,9 +21,10 @@ void scene_init() {
 	case 1:
 		game_init();
 		break;
-	case 2:
+	case 2:		
+		endgame_init();//end game
 		break;
-	case 3:
+	case 3:		
 		break;
 	case 4:
 		help_init();
@@ -44,6 +46,7 @@ void scene_del() {
 		game_del();
 		break;
 	case 2:
+		menu_del();
 		break;
 	case 3:
 		break;

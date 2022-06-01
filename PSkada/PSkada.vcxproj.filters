@@ -93,6 +93,9 @@
     <ClCompile Include="highscores.c">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="endgame.c">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -156,6 +159,9 @@
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="highscores.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="endgame.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

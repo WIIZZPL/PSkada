@@ -2,8 +2,7 @@
 
 #include "menu.h"
 #include "game.h"
-
-
+#include "endgame.h"
 #include "help.h"
 #include "highscores.h"
 
@@ -16,7 +15,7 @@ void update(double t, double dt) {
 	case 1: //Gra
 		game_update(t, dt);
 		break;
-	case 2: //Win game
+	case 2: endgame_update(t, dt); //Win game
 		break;
 	case 3: //Loose game
 		break;

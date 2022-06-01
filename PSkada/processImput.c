@@ -2,6 +2,7 @@
 
 #include "menu.h"
 #include "game.h"
+#include "endgame.h"
 
 
 #include "help.h"
@@ -48,9 +49,10 @@ void processImput() {
 		case 1: //gra
 			game_processImput(&event);
 			break;
-		case 2: //win game
+		case 2: //end game
+			endgame_processImput(&event);
 			break;
-		case 3: //loose game
+		case 3:
 			break;
 		case 4: //help
 			help_processImput(&event);

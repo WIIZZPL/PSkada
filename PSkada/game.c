@@ -11,6 +11,7 @@ BrickDArray* bricks;
 ALLEGRO_BITMAP* background;
 ALLEGRO_SAMPLE* gameTheme;
 
+
 void handleColissions(Palette* palette, BallDArray* balls, UpgradeDArray* upgrades, BrickDArray* bricks);
 int rectangleCircleColission(Rectangle* thisRectangle, Circle* thisCircle);
 void brickQTreeBallColission(BrickQTree* bricksQTree, BrickDArray* bricks, Ball* thisBall, UpgradeDArray* upgrades);
@@ -42,7 +43,7 @@ void game_init() {
 
 	bricks = createBrickDArray();
 	for (int i = 0; i < 16; i++) {
-		for (int j = 2; j < 9; j++) {
+		for (int j = 8; j < 9; j++) {
 			appendBrickDArray(bricks, createBrick(1.0/16*i, 0.5/9*j));
 		}
 	}
@@ -89,7 +90,7 @@ void game_update(double t, double dt) {
 		fclose(plik);
 		
 		switchScenes(2);
-	} else if (!balls->size) switchScenes(0);
+	} else if (!balls->size) switchScenes(2);
 	
 }
 

@@ -160,6 +160,7 @@
     <ClCompile Include="BrickQTree.c" />
     <ClCompile Include="Button.c" />
     <ClCompile Include="circle.c" />
+    <ClCompile Include="endgame.c" />
     <ClCompile Include="game.c" />
     <ClCompile Include="help.c" />
     <ClCompile Include="highscores.c" />
@@ -185,6 +186,7 @@
     <ClInclude Include="BrickQTree.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="circle.h" />
+    <ClInclude Include="endgame.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GLOBALVARS.h" />
     <ClInclude Include="help.h" />
